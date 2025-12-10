@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  site1:
+    image: nginx:alpine
+    volumes:
+      - ./site1/index.html:/usr/share/nginx/html/index.html
+
+  site2:
+    image: nginx:alpine
+    volumes:
+      - ./site2/index.html:/usr/share/nginx/html/index.html
+
+  reverse-proxy:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - site1
+      - site2
