@@ -1,23 +1,15 @@
 events {}
 
 http {
-    upstream site1_upstream {
-        server site1:80;
-    }
-
-    upstream site2_upstream {
-        server site2:80;
-    }
-
     server {
         listen 80;
 
         location /site1 {
-            proxy_pass http://site1_upstream;
+            proxy_pass http://site1:80;
         }
 
         location /site2 {
-            proxy_pass http://site2_upstream;
+            proxy_pass http://site2:80;
         }
     }
 }
